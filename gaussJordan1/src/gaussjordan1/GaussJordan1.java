@@ -35,7 +35,7 @@ public class GaussJordan1 {
         return true;
     }
     
-    public static void garantePivosComValorUm(double matriz[][],int qntdLinha, int qntdColuna){
+    public static double[][] garantePivosComValorUm(double matriz[][],int qntdLinha, int qntdColuna){
         double dividendo=1;
         for(int k=0; k<qntdLinha; k++){
             if(matriz[k][k]!=1){
@@ -48,13 +48,12 @@ public class GaussJordan1 {
                 } 
             }
         }
-            //Matriz.imprimeMatriz(matriz, qntdLinha, qntdColuna);
+            return matriz;
     }
     
     public static void metodoGaussJordan(double matriz[][], double matrizResultado[][],int qntdLinha, int qntdColuna){ 
         for(int k=0; k<qntdLinha; k++){
                 for(int i=0; i<qntdLinha; i++){
-                    garantePivosComValorUm(matriz, qntdLinha, qntdColuna); // se o pivô chegar a mudar o valor...
                     if(i!=k && matriz[i][k]!=0){  
                         for(int j=0; j<qntdColuna; j++){     
                             System.out.printf("Matriz conta ["+i+"]["+j+"] (%.4f) \n ",matriz[i][j]);
@@ -70,6 +69,9 @@ public class GaussJordan1 {
                 } 
             Matriz.imprimeMatriz(matrizResultado, qntdLinha, qntdColuna);
             matriz=Matriz.copiaMatriz(matrizResultado, qntdLinha, qntdColuna);
+            matriz=garantePivosComValorUm(matriz, qntdLinha, qntdColuna); // se o pivô chegar a mudar o valor...
+            
+            Matriz.imprimeMatriz(matriz,qntdLinha, qntdColuna);
         }
     }
     
@@ -91,7 +93,7 @@ public class GaussJordan1 {
         Matriz.imprimeMatriz(matriz, qndtLinha, qndtColuna);
         double matrizResultado[][] = Matriz.copiaMatriz(matriz, qndtLinha, qndtColuna);
         GaussJordan1.metodoGaussJordan(matriz,matrizResultado, qndtLinha, qndtColuna);
-        Matriz.imprimeMatriz(matrizResultado, qndtLinha, qndtColuna);
+       // Matriz.imprimeMatriz(matriz, qndtLinha, qndtColuna);
         
         
     }
